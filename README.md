@@ -53,3 +53,38 @@ Make sure these ports are not in use:
 # mail server
 ➜ sudo ./pudgemailer.sh -d example.com -m yes -g no
 ```
+
+### Uninstallation
+
+
+```bash
+➜ sudo ./pudge_uninstaller.sh -h
+
+        Usage:
+          pudge_uninstaller.sh [-d domain] [-h] [-m yes|no] [-g yes|no] [-y 2023] [-a]
+
+        Options:
+          -d domain         Domain name
+          -h                Help
+          -m yes|no         Remove a mail server (default: no)
+          -g yes|no         Create a gophish server (default: no)
+          -y year           Year of directory (default: 2023)
+          -a                Remove all mail or gopish servers
+```
+
+```bash 
+# uninstall specific gophish server
+➜ sudo ./pudge_uninstaller.sh -d example.com -g yes
+
+# uninstall specific mail server
+➜ sudo ./pudge_uninstaller.sh -d example.com -m yes
+
+# uninstall specific gophish and mail server
+➜ sudo ./pudge_uninstaller.sh -d example.com -m yes -g yes
+
+# uninstall all gophish and mail server
+➜ sudo ./pudge_uninstaller.sh -m yes -g yes -a
+
+# uninstall all gophish and mail server with specific year
+➜ sudo ./pudge_uninstaller.sh -m yes -g yes -y 2022 -a
+```
