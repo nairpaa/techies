@@ -74,7 +74,7 @@ check_programs() {
     programs=(docker certbot nc)
 
     # Add docker-compose if mail_server is set to "yes"
-    [[ $mail_server == "yes" ]] && programs+=(docker-compose)
+    [[ $mail_server == "yes" ]] && programs+=(docker-compose curl)
 
     for program in "${programs[@]}"; do
         if ! [ -x "$(command -v $program)" ]; then
