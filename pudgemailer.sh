@@ -184,12 +184,13 @@ mail_server_installation() {
 }
 
 gophish_installation() {
+    local gophish_dir="$year-gophish"
     create_directory "gophish" "$year" "$domain"
 
     echo -e "\e[32m[+]\e[0m Setting-up Gophish"
     if [[ $ssl == "https" ]]; then
         # Run gophish with https
-        docker run -d -p 127.0.0.1:3333:3333 -p 443:443 --name $domain-gophish -v $(pwd)/static:/opt/gophish/static/endpoint -v $(pwd)/letsencrypt:/opt/gophish/letsencrypt gophish/gophish > /dev/null 2>&1
+        docker run -d -p 127.0.0.1:3333:3333 -p 443:443 --name $domain-gophish -v $(pwd)/$gophish_dir/$domain/static:/opt/gophish/static/endpoint -v $(pwd)/$gophish_dir/$domain/letsencrypt:/opt/gophish/letsencrypt gophish/gophish > /dev/null 2>&1
         
         # Configuring ssl
         echo -e "\e[32m[+]\e[0m Adding letsencrypt certificate."
@@ -202,12 +203,12 @@ gophish_installation() {
         export path_certuser="/opt/gophish/letsencrypt/phishing"
         docker exec -it $domain-gophish sed -i "s@gophish_admin@$path_certadmin@g" /opt/gophish/config.json # setup ssl certificate
         docker exec -it $domain-gophish sed -i "s@example@$path_certadmin@g" /opt/gophish/config.json # setup ssl certificate
-        cp /etc/letsencrypt/live/$domain/fullchain.pem ./letsencrypt/phishing.crt
-        cp /etc/letsencrypt/live/$domain/privkey.pem ./letsencrypt/phishing.key
+        cp /etc/letsencrypt/live/$domain/fullchain.pem $(pwd)/$gophish_dir/$domain/letsencrypt/phishing.crt
+        cp /etc/letsencrypt/live/$domain/privkey.pem $(pwd)/$gophish_dir/$domain/letsencrypt/phishing.key
         docker exec -it -u 0 $domain-gophish chmod -R 777 /opt/gophish/letsencrypt/
     else
         # Run gophish with http
-        docker run -d -p 127.0.0.1:3333:3333 -p 80:80 --name $domain-gophish -v $(pwd)/static:/opt/gophish/static/endpoint -v $(pwd)/letsencrypt:/opt/gophish/letsencrypt gophish/gophish > /dev/null 2>&1 
+        docker run -d -p 127.0.0.1:3333:3333 -p 80:80 --name $domain-gophish -v $(pwd)/$gophish_dir/$domain/static:/opt/gophish/static/endpoint -v $(pwd)/$gophish_dir/$domain/letsencrypt:/opt/gophish/letsencrypt gophish/gophish > /dev/null 2>&1 
     fi
     
     # Restart gophish
