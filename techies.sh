@@ -11,16 +11,14 @@ check_root() {
 
 print_banner() {
 echo "
-  _____           _            __  __       _ _           
- |  __ \         | |          |  \/  |     (_) |          
- | |__) |   _  __| | __ _  ___| \  / | __ _ _| | ___ _ __ 
- |  ___/ | | |/ _\` |/ _\` |/ _ \ |\/| |/ _\` | | |/ _ \ '__|
- | |   | |_| | (_| | (_| |  __/ |  | | (_| | | |  __/ |   
- |_|    \__,_|\__,_|\__, |\___|_|  |_|\__,_|_|_|\___|_|   
-                     __/ |                                
-                    |___/                                 
+  _______        _     _           
+ |__   __|      | |   (_)          
+    | | ___  ___| |__  _  ___  ___ 
+    | |/ _ \/ __| '_ \| |/ _ \/ __|
+    | |  __/ (__| | | | |  __/\__ \\
+    |_|\___|\___|_| |_|_|\___||___/
 
- Mail Server & Gopish Installation v2.0"
+ Mail Server, Gopish and Evilginx3 Installation."
 
     echo -e "\\n\\e[33m[!]\\e[0m Before starting the mail server installation, make sure the DNS records are set as follows:"
     echo -e "> \\e[36m A   - @       - 141.95.xx.xx\\e[0m"
@@ -39,7 +37,7 @@ echo "
 display_help() {
     echo -e "\\n\
         Usage:\\n\
-          pudgemailer.sh [-d domain] [-h] [-s http|https] [-m yes|no] [-g yes|no]\\n\\n\
+          techies.sh [-d domain] [-h] [-s http|https] [-m yes|no] [-g yes|no]\\n\\n\
         Options:\\n\
           -d domain         Domain name\\n\
           -h                Help\\n\
